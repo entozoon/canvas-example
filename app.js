@@ -4,12 +4,25 @@ const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 const canvasWidth = canvas.width;
 const canvasHeight = canvas.height;
-// Run this block every 100ms
+
+// set line stroke and line width
+const w = 10;
+const h = 10;
+ctx.lineWidth = 1;
+
+// Run this loop every 10ms
 setInterval(() => {
-  ctx.fillStyle = "#00CCFF";
-  const x = Math.random() * canvasWidth;
-  const y = Math.random() * canvasHeight;
-  const w = 10;
-  const h = 10;
-  ctx.fillRect(x, y, w, h);
-}, 100);
+  // Draw 100 things each time
+  for (let i = 0; i < 100; i++) {
+    const color = "hsl(" + 360 * Math.random() + ", 50%, 50%)";
+    ctx.fillStyle = color;
+    ctx.strokeStyle = color;
+    const x = Math.random() * canvasWidth;
+    const y = Math.random() * canvasHeight;
+    ctx.fillRect(x, y, w, h);
+    ctx.beginPath();
+    ctx.moveTo(canvasWidth / 2, canvasHeight / 2);
+    ctx.lineTo(x, y);
+    ctx.stroke();
+  }
+}, 10);
